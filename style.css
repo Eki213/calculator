@@ -1,0 +1,37 @@
+.calculator {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: black;
+    width: 380px;
+    height: 560px;
+    padding: 20px;
+}
+
+.display {
+    background-color: aqua;
+    height: 80px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: gray;
+    flex: 1;
+}
+
+.buttons button {
+    font-size: 30px;
+    width: 85px;
+    height: 85px;
+    border-radius: 50px;
+}
+
+.buttons .clear-btn {
+    margin-left: 50%;
+    width: 50%;
+    height: 60px;
+}
