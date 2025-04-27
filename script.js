@@ -47,6 +47,7 @@ function handleNumber(input) {
     }
 
     if (isPoint(input) && currentInput.includes('.')) return;
+    if (currentInput.length === 15) return;
     currentInput += input;
 }
 
