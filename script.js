@@ -1,3 +1,108 @@
+const buttons = document.querySelector('.buttons');
+const display = document.querySelector('.display');
+
+let currentInput = '';
+let previousInput = '';
+let operator = '';
+let wasEqualsPressed = false;
+
+buttons.addEventListener('click', (e) => {
+    const input = e.target.textContent;
+    handleInput(input);
+    updateDisplay();
+});
+
+function handleInput(input) {
+    if (isClear(input)) return clear();
+
+    if (isDigit(input) || isPoint(input)) return handleNumber(input);
+
+    if (isOperator(input)) return handleOperator(input);
+
+    if (isEquals(input)) return handleEquals();
+}
+
+function handleNumber(input) {
+    if (wasEqualsPressed) {
+        currentInput = '';
+        wasEqualsPressed = false;
+    }
+
+    if (isPoint(input) && currentInput.includes('.')) return;
+    currentInput += input;
+}
+
+function handleOperator(input) {
+    if (!currentInput) {
+        operator = input;
+        if (!previousInput) previousInput = '0';
+        return;
+    }
+
+    if (handleDivideByZero()) return;
+
+    if (operator) previousInput = operate(operator, previousInput, currentInput);
+    else previousInput = currentInput;
+
+    operator = input;
+    currentInput = '';
+}
+
+function handleEquals() {
+    if (!operator || !currentInput) return;
+    if (handleDivideByZero()) return;
+
+    currentInput = operate(operator, previousInput, currentInput);
+    previousInput = '';
+    operator = '';
+    wasEqualsPressed = true;
+}
+
+function updateDisplay() {
+    cleanInputs();
+    display.textContent = `${previousInput} ${operator} ${currentInput}`;
+}
+
+function clear() {
+    currentInput = '0';
+    previousInput = '';
+    operator = '';
+}
+
+function isOperator(input) {
+    return '+-÷x'.includes(input);
+}
+
+function isEquals(input) {
+    return input === '=';
+}
+
+function isClear(input) {
+    return input === 'CLEAR';
+}
+
+function isDigit(input) {
+    return !isNaN(+input);
+}
+
+function isPoint(input) {
+    return input === '.';
+}
+
+function cleanInputs() {
+    if (currentInput && !currentInput.includes('.')) currentInput = `${+currentInput}`;
+    if (previousInput) previousInput = `${+previousInput}`;
+    if (currentInput === '.') currentInput = '0.';
+}
+
+function handleDivideByZero() {
+    if (operator === '÷' && currentInput === '0') {
+        alert('Cannot divide by 0.');
+        return true;
+    }
+    return false;
+}
+
 function add(a, b) {
     return a + b;
 }
@@ -14,11 +119,7 @@ function divide(a, b) {
     return a / b;
 }
 
-let operand1 = 0;
-let operator = '';
-let operand2 = 0;
-
-function operate(operator, operand1, operand2) {
+function operate(operator, currentInput, previousInput) {
     let operation;
 
     switch (operator) {
@@ -28,13 +129,17 @@ function operate(operator, operand1, operand2) {
         case '-':
             operation = subtract;
             break;
-        case '*':
+        case 'x':
             operation = multiply;
             break;
-        case '/':
+        case '÷':
             operation = divide;
             break;
     }
 
-    return operation(operand1, operand2);
+    return `${round(operation(+currentInput, +previousInput))}`;
+}
+
+function round(num) {
+    return Math.floor(num * 1000) / 1000;
 }
