@@ -1,13 +1,29 @@
 const buttons = document.querySelector('.buttons');
 const display = document.querySelector('.display');
 
-let currentInput = '';
+let currentInput = '0';
 let previousInput = '';
 let operator = '';
 let wasEqualsPressed = false;
+let keyMap = {
+    '/': '÷',
+    '*': 'x',
+    'x': null,
+    '÷': null,
+    'Enter': '=',
+    'Backspace' : 'UNDO',
+    'Escape' : 'CLEAR',
+};
 
 buttons.addEventListener('click', (e) => {
     const input = e.target.textContent;
+    handleInput(input);
+    updateDisplay();
+});
+
+window.addEventListener('keydown', (e) => {
+    if (keyMap[e.key] === null) return;
+    const input = keyMap[e.key] || e.key;
     handleInput(input);
     updateDisplay();
 });
