@@ -20,6 +20,8 @@ function handleInput(input) {
     if (isOperator(input)) return handleOperator(input);
 
     if (isEquals(input)) return handleEquals();
+
+    if (isUndo(input)) return undo();
 }
 
 function handleNumber(input) {
@@ -69,6 +71,10 @@ function clear() {
     operator = '';
 }
 
+function undo() {
+    currentInput = (currentInput.length > 1 || currentInput === '') ? currentInput.slice(0, -1) : '0';
+}
+
 function isOperator(input) {
     return '+-÷x'.includes(input);
 }
@@ -87,6 +93,10 @@ function isDigit(input) {
 
 function isPoint(input) {
     return input === '.';
+}
+
+function isUndo(input) {
+    return input === 'UNDO';
 }
 
 function cleanInputs() {

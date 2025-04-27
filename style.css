@@ -30,8 +30,7 @@
     border-radius: 50px;
 }
 
-.buttons .clear-btn {
-    margin-left: 50%;
-    width: 50%;
+.buttons .clear-btn, .buttons .undo-btn {
+    width: 48%;
     height: 60px;
 }
