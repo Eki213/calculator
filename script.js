@@ -89,6 +89,7 @@ function clear() {
 }
 
 function undo() {
+    if (wasEqualsPressed) return;
     currentInput = (currentInput.length > 1 || currentInput === '') ? currentInput.slice(0, -1) : '0';
 }
 
