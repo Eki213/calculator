@@ -124,7 +124,7 @@ function cleanInputs() {
 }
 
 function handleDivideByZero() {
-    if (operator === '÷' && currentInput === '0') {
+    if (operator === '÷' && +currentInput === 0) {
         alert('Cannot divide by 0.');
         return true;
     }
