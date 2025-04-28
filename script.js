@@ -81,7 +81,7 @@ function handleEquals() {
 
 function updateDisplay() {
     cleanInputs();
-    display.textContent = `${previousInput} ${operator} ${currentInput}`;
+    display.textContent = `${previousInput} ${operator} ${currentInput}`.trim();
 }
 
 function clear() {
