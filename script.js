@@ -26,8 +26,7 @@ buttons.addEventListener('click', (e) => {
 window.addEventListener('keydown', (e) => {
     if (keyMap[e.key] === null) return;
     const input = keyMap[e.key] || e.key;
-    handleInput(input);
-    updateDisplay();
+    if (handleInput(input) !== 'INVALID') updateDisplay();
 });
 
 function handleInput(input) {
@@ -40,6 +39,8 @@ function handleInput(input) {
     if (isEquals(input)) return handleEquals();
 
     if (isUndo(input)) return undo();
+
+    return 'INVALID';
 }
 
 function handleNumber(input) {
