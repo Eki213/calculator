@@ -10,6 +10,7 @@ let keyMap = {
     '*': 'x',
     'x': null,
     '÷': null,
+    ' ': null,
     'Enter': '=',
     'Backspace' : 'UNDO',
     'Escape' : 'CLEAR',
