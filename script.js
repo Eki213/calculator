@@ -44,8 +44,8 @@ function handleInput(input) {
 }
 
 function handleNumber(input) {
-    if (wasEqualsPressed) {
-        currentInput = '';
+    if (wasEqualsPressed || isOverflow(previousInput)) {
+        clear();
         wasEqualsPressed = false;
     }
 
@@ -120,10 +120,15 @@ function isUndo(input) {
     return input === 'UNDO';
 }
 
+function isOverflow(input) {
+    return input === 'Infinity' || input === '-Infinity';
+}
+
 function cleanInputs() {
     if (currentInput.startsWith('0') && isDigit(currentInput.at(1))) currentInput = currentInput.at(1);
     if (currentInput === '.') currentInput = '0.';
     if (previousInput) previousInput = `${+previousInput}`;
+    if (isOverflow(previousInput)) operator = '';
 }
 
 function handleDivideByZero() {
