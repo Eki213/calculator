@@ -19,6 +19,7 @@ buttons.addEventListener('click', (e) => {
     const input = e.target.textContent;
     handleInput(input);
     updateDisplay();
+    e.target.blur();
 });
 
 window.addEventListener('keydown', (e) => {
