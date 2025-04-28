@@ -118,9 +118,9 @@ function isUndo(input) {
 }
 
 function cleanInputs() {
-    if (currentInput && !currentInput.includes('.')) currentInput = `${+currentInput}`;
-    if (previousInput) previousInput = `${+previousInput}`;
+    if (currentInput.startsWith('0') && isDigit(currentInput.at(1))) currentInput = currentInput.at(1);
     if (currentInput === '.') currentInput = '0.';
+    if (previousInput) previousInput = `${+previousInput}`;
 }
 
 function handleDivideByZero() {
