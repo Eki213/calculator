@@ -44,10 +44,11 @@ function handleInput(input) {
 }
 
 function handleNumber(input) {
-    if (wasEqualsPressed || isOverflow(previousInput)) {
-        clear();
+    if (wasEqualsPressed) {
+        currentInput = '';
         wasEqualsPressed = false;
     }
+    if (isOverflow(previousInput)) previousInput = '';
 
     if (isPoint(input) && currentInput.includes('.')) return;
     if (currentInput.length === 15) return;
