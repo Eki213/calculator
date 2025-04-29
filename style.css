@@ -30,6 +30,7 @@ body {
     background-color: rgb(100, 102, 100);
     height: 80px;
     padding: 0 5px;
+    text-align: right;
 }
 
 .calculator, .display, .buttons button {
